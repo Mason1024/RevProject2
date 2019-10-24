@@ -15,7 +15,6 @@ public interface UserService {
 	
 	User getUserById(int id);
 	User getUserByUsername(String username);
-	User getUserByEmail(String email);
 	Set<User> getAllUsers();
 	
 	
