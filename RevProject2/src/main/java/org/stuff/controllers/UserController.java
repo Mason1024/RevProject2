@@ -56,9 +56,9 @@ public class UserController {
 	
 	// Delete
 	
-	@RequestMapping(value= "/users", method= RequestMethod.DELETE)
-	public boolean deleteUser() {
-		return false;
+	@RequestMapping(value= "/users/{id}", method= RequestMethod.DELETE)
+	public boolean deleteUser(@PathVariable int id) {
+		return us.deleteUser(us.getUserById(id));
 	}
 
 }
