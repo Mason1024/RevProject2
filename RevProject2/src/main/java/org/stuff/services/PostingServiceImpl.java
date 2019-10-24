@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.stuff.entities.Posting;
+import org.stuff.entities.User;
 import org.stuff.repo.PostingRepo;
 
 
@@ -31,9 +32,9 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public Set<Posting> getAllPostingsByUserId(int u_id) {
+	public Set<Posting> getAllPostingsByUser(User user) {
 		
-		return pr.findAllByU_id(u_id);
+		return pr.findAllByUser(user);
 	}
 
 	@Override
