@@ -30,35 +30,37 @@ public class UserRepoTests {
 
 	@Test
 	@Order(1)
+	@Commit
 	void setup() {
 		testUser = new User();
 		testUser.setUsername("TestUser");
 		testUser.setPassword("Pa$$word");
 		testUser.setEmail("TestUser@test.com");
-		testUser.setPhone_number("1234567890");
+		testUser.setPhoneNumber("1234567890");
 		testUser = ur.save(testUser);
 	}
-//	
-//	@Test
-//	@Order(2)
-//	@Commit
-//	void findByUsername() {
-//		User found = ur.findByUsername(testUser.getUsername());
-//		assertEquals(testUser, found);
-//	}
-//	
-//	@Test
-//	@Order(3)
-//	void findByEmail() {
-//		User found = ur.findByEmail(testUser.getEmail());
-//		assertEquals(testUser, found);
-//	}
-//	
-//	@Test
-//	@Order(5)
-//	@Commit
-//	void teardown() {
-//		ur.delete(testUser);
-//	}
+	
+	@Test
+	@Order(2)
+	void findByUsername() {
+		User found = ur.findByUsername(testUser.getUsername());
+		assertTrue(found.getUsername().equals(testUser.getUsername()));
+		assertTrue(found.getPassword().equals(testUser.getPassword()));
+	}
+	
+	@Test
+	@Order(3)
+	void findByEmail() {
+		User found = ur.findByEmail(testUser.getEmail());
+		assertTrue(found.getUsername().equals(testUser.getUsername()));
+		assertTrue(found.getPassword().equals(testUser.getPassword()));
+	}
+	
+	@Test
+	@Order(5)
+	@Commit
+	void teardown() {
+		ur.delete(testUser);
+	}
 	
 }
