@@ -1,6 +1,7 @@
 package org.stuff.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.stuff.entities.Posting;
 
@@ -16,8 +17,10 @@ public interface PostingService {
 	// Read
 	
 	Posting getPostingById(int p_id);
-	Posting getPostingByUserId(int u_id);
+	Set<Posting> getAllPostingsByUserId(int u_id);
 	List<Posting> getAllPostingByEndingSoonest();
+	List<Posting> getNewestByRange(int lowerIndex, int upperIndex);
+	List<Posting> getAllPostings();
 	
 	
 	// Update
