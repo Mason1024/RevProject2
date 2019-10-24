@@ -38,27 +38,27 @@ public class UserRepoTests {
 		testUser.setPhone_number("1234567890");
 		testUser = ur.save(testUser);
 	}
-	
-	@Test
-	@Order(2)
-	@Commit
-	void findByUsername() {
-		User found = ur.findByUsername(testUser.getUsername());
-		assertEquals(testUser, found);
-	}
-	
-	@Test
-	@Order(3)
-	void findByEmail() {
-		User found = ur.findByEmail(testUser.getEmail());
-		assertEquals(testUser, found);
-	}
-	
-	@Test
-	@Order(5)
-	@Commit
-	void teardown() {
-		ur.delete(testUser);
-	}
+//	
+//	@Test
+//	@Order(2)
+//	@Commit
+//	void findByUsername() {
+//		User found = ur.findByUsername(testUser.getUsername());
+//		assertEquals(testUser, found);
+//	}
+//	
+//	@Test
+//	@Order(3)
+//	void findByEmail() {
+//		User found = ur.findByEmail(testUser.getEmail());
+//		assertEquals(testUser, found);
+//	}
+//	
+//	@Test
+//	@Order(5)
+//	@Commit
+//	void teardown() {
+//		ur.delete(testUser);
+//	}
 	
 }
