@@ -1,5 +1,6 @@
 package org.stuff.repo;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
@@ -13,5 +14,7 @@ public interface PostingRepo extends CrudRepository<Posting,Integer>{
 
 	Set<Posting> findAllByU_id(int u_id);
 	Set<Posting> findAllByCategory(String category);
+	List<Posting> findAllByOrderByInit_dateDesc();
+	List<Posting> findAllByOrderByEnd_dateDesc();
 	
 }
