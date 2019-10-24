@@ -1,10 +1,10 @@
-package org.stuff.app;
+package org.stuff.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class PostingRepoTest {
+public class PostingControllerTest {
 
 	@Test
 	void test() {
