@@ -11,7 +11,7 @@ public class Posting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "p_id")
-    private int p_id;
+    private int id;
 
     @JoinColumn(name = "u_id")
     @ManyToOne
@@ -39,15 +39,16 @@ public class Posting {
     private Blob img;
 
     public Posting() { }
-    public int getId() {
-        return p_id;
-    }
 
-    public void setId(int p_id) {
-        this.p_id = p_id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public User getUser() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
         return user;
     }
 
@@ -113,7 +114,7 @@ public class Posting {
 
     @Override
     public String toString() {
-        return "Posting [id=" + p_id + ", user=" + user + ", title=" + title + ", description=" + description
+        return "Posting [id=" + id + ", user=" + user + ", title=" + title + ", description=" + description
                 + ", category=" + category + ", location=" + location + ", init_date=" + init_date + ", end_date="
                 + end_date + "]";
     }

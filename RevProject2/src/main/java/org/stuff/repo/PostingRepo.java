@@ -7,12 +7,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.stuff.entities.Posting;
+import org.stuff.entities.User;
 
 @Component
 @Repository
 public interface PostingRepo extends CrudRepository<Posting,Integer>{
 
-	Set<Posting> findAllByU_id(int u_id);
+	Set<Posting> findAllByUser(User user);
 	Set<Posting> findAllByCategory(String category);
 	List<Posting> findAllByOrderByInit_dateDesc();
 	List<Posting> findAllByOrderByEnd_dateDesc();
