@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.stuff.entities.Posting;
+import org.stuff.entities.User;
 
 public interface PostingService {
 	
@@ -17,7 +18,7 @@ public interface PostingService {
 	// Read
 	
 	Posting getPostingById(int p_id);
-	Set<Posting> getAllPostingsByUserId(int u_id);
+	Set<Posting> getAllPostingsByUser(User user);
 	List<Posting> getAllPostingByEndingSoonest();
 	List<Posting> getNewestByRange(int lowerIndex, int upperIndex);
 	List<Posting> getAllPostings();

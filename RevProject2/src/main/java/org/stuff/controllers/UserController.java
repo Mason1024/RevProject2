@@ -1,5 +1,7 @@
 package org.stuff.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,7 @@ public class UserController {
 	UserService us;
 	
 	// Create
-	@RequestMapping(value="", method= RequestMethod.GET)
+	@RequestMapping(value="/users", method= RequestMethod.POST)
 	public User createUser(@RequestBody User user) {
 		
 		return us.createUser(user);
@@ -29,23 +31,32 @@ public class UserController {
 	
 	// Read
 	
-	@RequestMapping(value= "/getUserById/{ID}", method= RequestMethod.GET)
-	
+	@RequestMapping(value= "/users/{ID}", method= RequestMethod.GET)
 	public User getUserById(@PathVariable int ID) {
 		
 		return us.getUserById(ID);
 	}
 	
+	@RequestMapping(value= "/users/{USERNAME}", method= RequestMethod.GET)
+	public User getUserByUsername(@PathVariable String USERNAME) {
+		return us.getUserByUsername(USERNAME);
+	}
+	
+	@RequestMapping(value= "/users", method= RequestMethod.GET)
+	public Set<User> getAllUsers(){
+		return us.getAllUsers();
+	}
+	
 	// Update
 	
-	@RequestMapping(value= "", method= RequestMethod.POST)
+	@RequestMapping(value= "/users", method= RequestMethod.PUT)
 	public User updateUser(@RequestBody User user) {
 		return us.updateUser(user);
 	}
 	
 	// Delete
 	
-	@RequestMapping(value= "", method= RequestMethod.DELETE)
+	@RequestMapping(value= "/users", method= RequestMethod.DELETE)
 	public boolean deleteUser() {
 		return false;
 	}
