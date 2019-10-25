@@ -61,9 +61,9 @@ public class PostingController {
 	
 	// Delete
 	
-	@RequestMapping(value= "/postings", method= RequestMethod.DELETE)
-	public boolean deletePosting(@RequestBody Posting posting) {
-		return ps.deletePosting(posting);
+	@RequestMapping(value= "/postings/{id}", method= RequestMethod.DELETE)
+	public boolean deletePosting(@PathVariable int id) {
+		return ps.deletePosting(ps.getPostingById(id));
 	}
 	
 }
