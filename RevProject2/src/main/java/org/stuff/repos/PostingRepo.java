@@ -1,4 +1,4 @@
-package org.stuff.repo;
+package org.stuff.repos;
 
 import java.util.List;
 import java.util.Set;
@@ -22,7 +22,7 @@ public interface PostingRepo extends CrudRepository<Posting,Integer>{
 	List<Posting> findAllByOrderByInitDateDesc();
 	
 	/**
-	 * @return most soonest ending item first
+	 * @return soonest ending item first
 	 */
 	List<Posting> findAllByOrderByEndDateAsc();
 	

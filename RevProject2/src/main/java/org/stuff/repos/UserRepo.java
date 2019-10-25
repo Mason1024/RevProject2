@@ -1,4 +1,4 @@
-package org.stuff.repo;
+package org.stuff.repos;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;

@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import org.stuff.entities.User;
-import org.stuff.repo.UserRepo;
+import org.stuff.repos.UserRepo;
 
 @SpringBootTest
 @Transactional

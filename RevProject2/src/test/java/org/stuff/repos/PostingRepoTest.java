@@ -2,7 +2,6 @@ package org.stuff.repos;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,11 +16,10 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import org.stuff.entities.Posting;
 import org.stuff.entities.User;
-import org.stuff.repo.PostingRepo;
-import org.stuff.repo.UserRepo;
+import org.stuff.repos.PostingRepo;
+import org.stuff.repos.UserRepo;
 
 @SpringBootTest
 @Transactional
@@ -164,7 +162,7 @@ public class PostingRepoTest {
 	}
 	
 	private void wasteTime() {
-		long end = System.currentTimeMillis()+2000;
+		long end = System.currentTimeMillis()+1000;
 		while(System.currentTimeMillis()<end) {}
 	}
 	
