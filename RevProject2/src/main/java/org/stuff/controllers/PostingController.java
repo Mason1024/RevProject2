@@ -1,8 +1,6 @@
 package org.stuff.controllers;
 
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.stuff.entities.Posting;
-import org.stuff.entities.User;
 import org.stuff.services.PostingService;
 
 @Component
@@ -43,12 +40,30 @@ public class PostingController {
 	}
 	
 	
+	@RequestMapping(value= "/postings/end", method= RequestMethod.GET)
+	public List<Posting> getPostingsEndingSoonest(){
+		return ps.getAllPostingByEndingSoonest();
+	}
 	
+	@RequestMapping(value= "/postings/range/{lower}/{upper}", method= RequestMethod.GET)
+	public List<Posting> getPostingsByRange(@PathVariable int lower, @PathVariable int upper){
+		return this.getAllPostings().subList(lower, upper);
+	}
 	
 	
 	// Update
 	
+	@RequestMapping(value= "/postings", method= RequestMethod.PUT)
+	public Posting updatePosting(@RequestBody Posting posting){
+		return ps.updatePosting(posting);
+	}
+	
 	
 	// Delete
+	
+	@RequestMapping(value= "/postings/{id}", method= RequestMethod.DELETE)
+	public boolean deletePosting(@PathVariable int id) {
+		return ps.deletePosting(ps.getPostingById(id));
+	}
 	
 }

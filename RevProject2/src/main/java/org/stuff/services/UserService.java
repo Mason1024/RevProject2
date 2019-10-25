@@ -13,6 +13,8 @@ public interface UserService {
 	
 	// Read
 	
+	User login(String username, String password);
+	
 	User getUserById(int id);
 	User getUserByUsername(String username);
 	Set<User> getAllUsers();
