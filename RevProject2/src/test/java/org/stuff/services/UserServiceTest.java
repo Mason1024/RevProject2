@@ -73,7 +73,7 @@ public class UserServiceTest {
 	
 	@Test
 	@Order(3)
-	void getUserByUsername(String username) {
+	void getUserByUsername() {
 		User result = us.getUserByUsername(testUser.getUsername());
 		assertTrue(result != null);
 		assertTrue(result.getUsername().equals(testUser.getUsername()));
@@ -101,12 +101,24 @@ public class UserServiceTest {
 	
 	// Update
 	
-//	User updateUser(User user);
-//	
-//	
-//	// Delete
-//	
-//	boolean deleteUser(User user);
-//	
-//	
+	@Test
+	@Order(3)
+	void updateUser() {
+		String oldNumber = new String(testUser.getPhoneNumber());
+		testUser.setPhoneNumber("9999999999");
+		User tempUser = us.updateUser(testUser);
+		assertTrue(tempUser != null);
+		assertTrue(!tempUser.getPhoneNumber().equals(oldNumber));
+	}
+
+	
+	// Delete
+	
+	@Test
+	@Order(4)
+	void deleteUser() {
+		
+	}
+	
+	
 }
