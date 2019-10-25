@@ -49,7 +49,7 @@ public class UserRepoTests {
 	}
 	
 	@Test
-	@Order(3)
+	@Order(2)
 	void findByEmail() {
 		User found = ur.findByEmail(testUser.getEmail());
 		assertTrue(found.getUsername().equals(testUser.getUsername()));
@@ -57,7 +57,7 @@ public class UserRepoTests {
 	}
 	
 	@Test
-	@Order(5)
+	@Order(3)
 	@Commit
 	void teardown() {
 		ur.delete(testUser);

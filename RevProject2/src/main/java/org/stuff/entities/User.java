@@ -79,6 +79,12 @@ public class User {
 	public void setPostings(Set<Posting> postings) {
 		this.postings = postings;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -88,7 +94,7 @@ public class User {
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((postings == null) ? 0 : postings.hashCode());
+//		result = prime * result + ((postings == null) ? 0 : postings.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -122,8 +128,9 @@ public class User {
 		if (postings == null) {
 			if (other.postings != null)
 				return false;
-		} else if (!postings.equals(other.postings))
-			return false;
+		}
+//		} else if (!postings.equals(other.postings))
+//			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;

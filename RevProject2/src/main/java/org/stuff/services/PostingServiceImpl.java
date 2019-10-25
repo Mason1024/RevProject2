@@ -40,7 +40,7 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public List<Posting> getAllPostingByEndingSoonest() {
 		
-		return pr.findAllByOrderByEndDateDesc();
+		return pr.findAllByOrderByEndDateAsc();
 	}
 
 	@Override

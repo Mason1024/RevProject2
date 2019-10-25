@@ -15,7 +15,15 @@ public interface PostingRepo extends CrudRepository<Posting,Integer>{
 
 	Set<Posting> findAllByUser(User user);
 	Set<Posting> findAllByCategory(String category);
+	
+	/**
+	 * @return most recently added item first
+	 */
 	List<Posting> findAllByOrderByInitDateDesc();
-	List<Posting> findAllByOrderByEndDateDesc();
+	
+	/**
+	 * @return most soonest ending item first
+	 */
+	List<Posting> findAllByOrderByEndDateAsc();
 	
 }
