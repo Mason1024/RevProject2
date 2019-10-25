@@ -49,46 +49,46 @@ public class Posting {
 	}
 
 	public User getUser() {
-        return user;
-    }
+		return user;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public long getInitDate() {
+	public long getInitDate() {
 		return initDate;
 	}
 
@@ -105,19 +105,19 @@ public class Posting {
 	}
 
 	public Blob getImg() {
-        return img;
-    }
+		return img;
+	}
 
-    public void setImg(Blob img) {
-        this.img = img;
-    }
+	public void setImg(Blob img) {
+		this.img = img;
+	}
 
-    @Override
-    public String toString() {
-        return "Posting [id=" + id + ", user=" + user + ", title=" + title + ", description=" + description
-                + ", category=" + category + ", location=" + location + ", init_date=" + initDate + ", end_date="
-                + endDate + "]";
-    }
+	@Override
+	public String toString() {
+		return "Posting [id=" + id + ", user=" + user.getId() + ", title=" + title + ", description=" + description
+				+ ", category=" + category + ", location=" + location + ", initDate=" + initDate + ", endDate="
+				+ endDate + ", img=" + img + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -158,11 +158,11 @@ public class Posting {
 			return false;
 		if (id != other.id)
 			return false;
-		if (img == null) {
-			if (other.img != null)
-				return false;
-		} else if (!img.equals(other.img))
-			return false;
+//		if (img == null) {
+//			if (other.img != null)
+//				return false;
+//		} else if (!img.equals(other.img))
+//			return false;
 		if (initDate != other.initDate)
 			return false;
 		if (location == null) {
@@ -182,5 +182,7 @@ public class Posting {
 			return false;
 		return true;
 	}
+
+    
 
 }
