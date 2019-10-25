@@ -31,6 +31,11 @@ public class UserController {
 	
 	// Read
 	
+	@RequestMapping(value="/login", method= RequestMethod.POST)
+	public User login(@RequestBody String username, @RequestBody String password) {
+		return us.login(username, password);
+	}
+	
 	@RequestMapping(value= "/users/{ID}", method= RequestMethod.GET)
 	public User getUserById(@PathVariable int ID) {
 		
