@@ -1,5 +1,7 @@
 package org.stuff.services;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.stuff.entities.Posting;
 import org.stuff.entities.User;
-import org.stuff.repo.PostingRepo;
+import org.stuff.repos.PostingRepo;
 
 
 @Component
@@ -39,8 +41,15 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public List<Posting> getAllPostingByEndingSoonest() {
-		
-		return pr.findAllByOrderByEndDateAsc();
+		List<Posting> items = pr.findAllByOrderByEndDateAsc();
+		for(int i=0;i<items.size();i++) {
+			if(items.get(0).getEndDate()==0) {
+				items.remove(items.get(0));
+			}else {
+				break;
+			}
+		}
+		return items;
 	}
 
 	@Override
@@ -51,8 +60,7 @@ public class PostingServiceImpl implements PostingService {
 
 	@Override
 	public List<Posting> getAllPostings() {
-		// make sure we test this thoroughly, i'm worried about casting straight from Iterable to List. -Aaron
-		return (List<Posting>) pr.findAll();
+		return new LinkedList<Posting>((Collection<? extends Posting>) pr.findAll());
 	}
 
 	@Override

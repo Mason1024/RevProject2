@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.stuff.entities.User;
-import org.stuff.repo.UserRepo;
+import org.stuff.repos.UserRepo;
 
 
 @Component
@@ -26,10 +26,8 @@ public class UserServiceImpl implements UserService {
 
 	public User login(String username, String password) {
 		User user = this.getUserByUsername(username);
-		if(user!=null) {
-			if(user.getPassword()==password) {
-				return user;
-			}
+		if(user!=null && user.getPassword().equals(password)) {
+			return user;
 		}
 		return null;
 	}
