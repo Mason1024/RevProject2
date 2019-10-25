@@ -24,6 +24,16 @@ public class UserServiceImpl implements UserService {
 		return ur.save(user);
 	}
 
+	public User login(String username, String password) {
+		User user = this.getUserByUsername(username);
+		if(user!=null) {
+			if(user.getPassword()==password) {
+				return user;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public User getUserById(int id) {
 		
