@@ -183,11 +183,5 @@ public class PostingServiceTest {
 		
 		us.deleteUser(testUser1);
 		us.deleteUser(testUser2);
-	}
-	
-	private void wasteTime() {
-		long end = System.currentTimeMillis()+1000;
-		while(System.currentTimeMillis()<end) {}
-	}
-	
+	}	
 }
