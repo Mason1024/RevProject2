@@ -59,13 +59,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean deleteUser(User user) {
 		
-		try {
+
 			ur.delete(user);
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-			return false;
-		}
+			return !ur.existsById(user.getId());
+
 		
 		
 	}
