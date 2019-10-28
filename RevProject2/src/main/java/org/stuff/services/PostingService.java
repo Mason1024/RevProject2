@@ -19,10 +19,15 @@ public interface PostingService {
 	
 	Posting getPostingById(int p_id);
 	Set<Posting> getAllPostingsByUser(User user);
+	Set<Posting> getAllPostingsByCategory(String category);
 	List<Posting> getAllPostingByEndingSoonest();
+	/**
+	 * @param lowerIndex index 0, inclusive
+	 * @param upperIndex exclusive
+	 * @return
+	 */
 	List<Posting> getNewestByRange(int lowerIndex, int upperIndex);
 	List<Posting> getAllPostings();
-	
 	
 	// Update
 	

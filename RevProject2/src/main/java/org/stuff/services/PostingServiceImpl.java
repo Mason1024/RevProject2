@@ -40,6 +40,11 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
+	public Set<Posting> getAllPostingsByCategory(String category){
+		return pr.findAllByCategory(category);
+	}
+
+	@Override
 	public List<Posting> getAllPostingByEndingSoonest() {
 		List<Posting> items = pr.findAllByOrderByEndDateAsc();
 		for(int i=0;i<items.size();i++) {

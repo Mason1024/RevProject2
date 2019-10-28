@@ -59,60 +59,50 @@ public class PostingServiceTest {
 		testPosting1.setTitle("PSTestItem1");
 		testPosting1.setCategory("Table");
 		testPosting1.setLocation("TestLocation");
-		testPosting1.setInitDate(System.currentTimeMillis());
-		testPosting1.setEndDate(System.currentTimeMillis()+10000);
+		testPosting1.setInitDate(Long.MAX_VALUE-6);
+		testPosting1.setEndDate(1);
 		testPosting1.setUser(testUser1);
 		testPosting1 = ps.createPosting(testPosting1);
 		
-		wasteTime();
-		
 		testPosting2 = new Posting();
 		testPosting2.setTitle("PSTestItem2");
-		testPosting2.setCategory("Table");
+		testPosting2.setCategory("Chair");
 		testPosting2.setLocation("TestLocation");
-		testPosting2.setInitDate(System.currentTimeMillis());
+		testPosting2.setInitDate(Long.MAX_VALUE-5);
 		testPosting2.setUser(testUser1);
 		testPosting2 = ps.createPosting(testPosting2);
-
-		wasteTime();
 		
 		testPosting3 = new Posting();
 		testPosting3.setTitle("PSTestItem3");
-		testPosting3.setCategory("Table");
+		testPosting3.setCategory("Chair");
 		testPosting3.setLocation("TestLocation");
-		testPosting3.setInitDate(System.currentTimeMillis());
-		testPosting3.setEndDate(System.currentTimeMillis()+10000);
+		testPosting3.setInitDate(Long.MAX_VALUE-4);
+		testPosting3.setEndDate(2);
 		testPosting3.setUser(testUser1);
 		testPosting3 = ps.createPosting(testPosting3);
-
-		wasteTime();
 		
 		testPosting4 = new Posting();
 		testPosting4.setTitle("PSTestItem4");
 		testPosting4.setCategory("Table");
 		testPosting4.setLocation("TestLocation");
-		testPosting4.setInitDate(System.currentTimeMillis());
+		testPosting4.setInitDate(Long.MAX_VALUE-3);
 		testPosting4.setUser(testUser2);
 		testPosting4 = ps.createPosting(testPosting4);
-
-		wasteTime();
 		
 		testPosting5 = new Posting();
 		testPosting5.setTitle("PSTestItem5");
-		testPosting5.setCategory("Table");
+		testPosting5.setCategory("Chair");
 		testPosting5.setLocation("TestLocation");
-		testPosting5.setInitDate(System.currentTimeMillis());
-		testPosting5.setEndDate(System.currentTimeMillis()+10000);
+		testPosting5.setInitDate(Long.MAX_VALUE-2);
+		testPosting5.setEndDate(3);
 		testPosting5.setUser(testUser2);
 		testPosting5 = ps.createPosting(testPosting5);
-
-		wasteTime();
 		
 		testPosting6 = new Posting();
 		testPosting6.setTitle("PSTestItem6");
 		testPosting6.setCategory("Table");
 		testPosting6.setLocation("TestLocation");
-		testPosting6.setInitDate(System.currentTimeMillis());
+		testPosting6.setInitDate(Long.MAX_VALUE-1);
 		testPosting6.setUser(testUser2);
 		testPosting6 = ps.createPosting(testPosting6);
 	}
@@ -128,9 +118,17 @@ public class PostingServiceTest {
 	@Order(2)
 	void getAllPostingsByUser() {
 		Set<Posting> items = ps.getAllPostingsByUser(testUser1);
-		for(Posting item:items) {
-			assertTrue(item.equals(testPosting1)||item.equals(testPosting2)||item.equals(testPosting3), "Incorrect item found "+item);
-		}
+		assertTrue(items.contains(testPosting1));
+		assertTrue(items.contains(testPosting2));
+		assertTrue(items.contains(testPosting3));
+	}
+	@Test
+	@Order(2)
+	void getAllPostingsByCategory() {
+		Set<Posting> items = ps.getAllPostingsByCategory("Table");
+		assertTrue(items.contains(testPosting1));
+		assertTrue(items.contains(testPosting4));
+		assertTrue(items.contains(testPosting6));
 	}
 	@Test
 	@Order(2)
@@ -144,22 +142,19 @@ public class PostingServiceTest {
 	@Order(2)
 	void getNewestByRange() {
 		List<Posting> items = ps.getNewestByRange(2, 4);
-		assertTrue(items.get(0).equals(testPosting4));
-		assertTrue(items.get(1).equals(testPosting3));
+		assertTrue(items.get(0).equals(testPosting4), "Item 2");
+		assertTrue(items.get(1).equals(testPosting3), "Item 3");
 	}
 	@Test
 	@Order(2)
 	void getAllPostings() {
 		List<Posting> items = ps.getAllPostings();
-		assertTrue(items.size()>=6, "6 posting delcared, at least 6 posting should be found");
-		for(Posting item:items) {
-			assertTrue(	item.equals(testPosting1)||
-						item.equals(testPosting2)||
-						item.equals(testPosting3)||
-						item.equals(testPosting4)||
-						item.equals(testPosting5)||
-						item.equals(testPosting6));
-		}
+		assertTrue(items.contains(testPosting1));
+		assertTrue(items.contains(testPosting2));
+		assertTrue(items.contains(testPosting3));
+		assertTrue(items.contains(testPosting4));
+		assertTrue(items.contains(testPosting5));
+		assertTrue(items.contains(testPosting6));
 	}
 	@Test
 	@Order(2)
