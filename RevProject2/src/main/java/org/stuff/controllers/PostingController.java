@@ -33,6 +33,10 @@ public class PostingController {
 		return ps.getPostingById(ID);
 	}
 	
+	@RequestMapping(value= "/postings/allbyuser/{ID}", method= RequestMethod.GET)
+	public Posting getPostingByUser(@PathVariable int ID) {
+		return ps.getPostingById(ID);
+	}
 	
 	@RequestMapping(value= "/postings", method= RequestMethod.GET)
 	public List<Posting> getAllPostings(){
