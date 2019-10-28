@@ -125,10 +125,10 @@ public class User {
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
-		if (postings == null) {
-			if (other.postings != null)
-				return false;
-		}
+//		if (postings == null) {
+//			if (other.postings != null)
+//				return false;
+//		}
 //		} else if (!postings.equals(other.postings))
 //			return false;
 		if (username == null) {

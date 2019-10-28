@@ -63,32 +63,28 @@ public class PostingRepoTest {
 		testPosting1.setDescription("This is a test item");
 		testPosting1.setCategory("Table");
 		testPosting1.setLocation("Test Location");
-		testPosting1.setInitDate(System.currentTimeMillis());
-		testPosting1.setEndDate(System.currentTimeMillis()+10000);
+		testPosting1.setInitDate(Long.MAX_VALUE-3);
+		testPosting1.setEndDate(1);
 		testPosting1.setUser(testUser1);
 		testPosting1 = pr.save(testPosting1);
-		
-		wasteTime();
 		
 		testPosting2 = new Posting();
 		testPosting2.setTitle("Item2");
 		testPosting2.setDescription("This is a test item");
 		testPosting2.setCategory("Chair");
 		testPosting2.setLocation("Test Location");
-		testPosting2.setInitDate(System.currentTimeMillis());
-		testPosting2.setEndDate(System.currentTimeMillis()+10000);
+		testPosting2.setInitDate(Long.MAX_VALUE-2);
+		testPosting2.setEndDate(2);
 		testPosting2.setUser(testUser1);
 		testPosting2 = pr.save(testPosting2);
-		
-		wasteTime();
 		
 		testPosting3 = new Posting();
 		testPosting3.setTitle("Item3");
 		testPosting3.setDescription("This is a test item");
 		testPosting3.setCategory("Table");
 		testPosting3.setLocation("Test Location");
-		testPosting3.setInitDate(System.currentTimeMillis());
-		testPosting3.setEndDate(System.currentTimeMillis()+10000);
+		testPosting3.setInitDate(Long.MAX_VALUE-1);
+		testPosting3.setEndDate(3);
 		testPosting3.setUser(testUser2);
 		testPosting3 = pr.save(testPosting3);
 		
@@ -98,38 +94,18 @@ public class PostingRepoTest {
 	@Order(2)
 	void findAllByUser() {
 		Set<Posting> items = pr.findAllByUser(testUser1);
-		System.out.println("User Items: "+items);
-		
-		assertTrue(items.size()==2,"Only 2 items in set");
-		for(Posting item:items) {
-			if(item.equals(testPosting1)||item.equals(testPosting2)) {
-				assertTrue(true, "Correct Item found");
-			}else {
-				assertTrue(false, "Incorrect item found in list: "+item);
-			}
-		}
-		
-//		assertTrue(items.contains(testPosting1), "Set has item 1 "+testPosting1);
-//		assertTrue(items.contains(testPosting2), "Set has item 2 "+testPosting1);
-//		assertTrue(!items.contains(testPosting3), "Set does not have item 3 "+testPosting1);
+		assertTrue(items.contains(testPosting1), "Set has item 1 "+testPosting1);
+		assertTrue(items.contains(testPosting2), "Set has item 2 "+testPosting1);
+		assertTrue(!items.contains(testPosting3), "Set does not have item 3 "+testPosting1);
 	}
 	
 	@Test
 	@Order(2)
 	void findAllByCategory() {
 		Set<Posting> items = pr.findAllByCategory("Table");
-		System.out.println("Category Items: "+items);
-		
-		for(Posting item:items) {
-			if(item.equals(testPosting1)||item.equals(testPosting3)) {
-				assertTrue(true, "Correct Item found");
-			}else {
-				assertTrue(false, "Incorrect item found in list: "+item);
-			}
-		}
-//		assertTrue(items.contains(testPosting1), "Set has item 1 "+testPosting1);
-//		assertTrue(items.contains(testPosting3), "Set has item 3 "+testPosting3);
-//		assertTrue(!items.contains(testPosting2), "Set does not have item 2 "+testPosting2);
+		assertTrue(items.contains(testPosting1), "Set has item 1 "+testPosting1);
+		assertTrue(items.contains(testPosting3), "Set has item 3 "+testPosting3);
+		assertTrue(!items.contains(testPosting2), "Set does not have item 2 "+testPosting2);
 	}
 	
 	@Test
@@ -145,13 +121,23 @@ public class PostingRepoTest {
 	@Order(2)
 	void findAllByOrderByEndDateAsc() {
 		List<Posting> items = pr.findAllByOrderByEndDateAsc();
+		
+		//remove the items without end date (0 time)
+		for(int i=0;i<items.size();i++) {
+			if(items.get(0).getEndDate()==0) {
+				items.remove(items.get(0));
+			}else {
+				break;
+			}
+		}
+		
 		assertTrue(items.get(0).equals(testPosting1), "List has item 1");
 		assertTrue(items.get(1).equals(testPosting2), "List has item 2");
 		assertTrue(items.get(2).equals(testPosting3), "List has item 3");
 	}
 	
 	@Test
-	@Order(10)
+	@Order(3)
 	@Commit
 	void teardown() {
 		pr.delete(testPosting1);
@@ -160,10 +146,4 @@ public class PostingRepoTest {
 		ur.delete(testUser1);
 		ur.delete(testUser2);
 	}
-	
-	private void wasteTime() {
-		long end = System.currentTimeMillis()+1000;
-		while(System.currentTimeMillis()<end) {}
-	}
-	
 }
