@@ -92,9 +92,28 @@ public class UserServiceTest {
 		Set<User> result = us.getAllUsers();
 
 		assertTrue(result != null);
-		assertTrue(result.contains(testUser));
-		assertTrue(result.contains(tempUser));
+		assertTrue(result.remove(testUser));
+		assertTrue(result.remove(tempUser));
 		
+	}
+	
+	
+	@Test
+	@Order(3)
+	void loginSuccess() {
+		assertTrue(us.login("TestUser", "Pa$$word") != null);
+	}
+	
+	@Test
+	@Order(3)
+	void loginFailUsername() {
+		assertTrue(!(us.login("wrong", "Pa$$word") != null));
+	}
+	
+	@Test
+	@Order(3)
+	void loginFailPassword() {
+		assertTrue(!(us.login("TestUser", "wrong") != null));
 	}
 
 	
@@ -118,6 +137,7 @@ public class UserServiceTest {
 	@Order(4)
 	void deleteUser() {
 		
+		assertTrue(us.deleteUser(testUser));
 	}
 	
 	
