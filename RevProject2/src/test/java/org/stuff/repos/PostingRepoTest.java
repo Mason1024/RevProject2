@@ -45,14 +45,14 @@ public class PostingRepoTest {
 	@Commit
 	void setup() {
 		testUser1 = new User();
-		testUser1.setUsername("TestUser1");
+		testUser1.setUsername("PRTestUser1");
 		testUser1.setPassword("Pa$$word");
 		testUser1.setEmail("TestUser1@test.com");
 		testUser1.setPhoneNumber("1234567890");
 		testUser1 = ur.save(testUser1);
 		
 		testUser2 = new User();
-		testUser2.setUsername("TestUser2");
+		testUser2.setUsername("PRTestUser2");
 		testUser2.setPassword("Pa$$word");
 		testUser2.setEmail("TestUser2@test.com");
 		testUser2.setPhoneNumber("1234567890");

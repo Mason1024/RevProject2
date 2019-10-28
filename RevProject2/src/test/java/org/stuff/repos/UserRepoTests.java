@@ -33,7 +33,7 @@ public class UserRepoTests {
 	@Commit
 	void setup() {
 		testUser = new User();
-		testUser.setUsername("TestUser");
+		testUser.setUsername("URTestUser");
 		testUser.setPassword("Pa$$word");
 		testUser.setEmail("TestUser@test.com");
 		testUser.setPhoneNumber("1234567890");
