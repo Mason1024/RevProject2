@@ -1,7 +1,5 @@
 package org.stuff.entities;
 
-import java.sql.Blob;
-
 import javax.persistence.*;
 
 @Entity
@@ -36,7 +34,7 @@ public class Posting {
     private long endDate;
 
     @Column (name = "img")
-    private Blob img;
+    private String img;
 
     public Posting() { }
 
@@ -104,11 +102,11 @@ public class Posting {
 		this.endDate = endDate;
 	}
 
-	public Blob getImg() {
+	public String getImg() {
 		return img;
 	}
 
-	public void setImg(Blob img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 
@@ -158,11 +156,11 @@ public class Posting {
 			return false;
 		if (id != other.id)
 			return false;
-//		if (img == null) {
-//			if (other.img != null)
-//				return false;
-//		} else if (!img.equals(other.img))
-//			return false;
+		if (img == null) {
+			if (other.img != null)
+				return false;
+		} else if (!img.equals(other.img))
+			return false;
 		if (initDate != other.initDate)
 			return false;
 		if (location == null) {
@@ -181,8 +179,6 @@ public class Posting {
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
-	}
-
-    
+	}   
 
 }
