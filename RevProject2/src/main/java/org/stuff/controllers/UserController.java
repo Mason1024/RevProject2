@@ -42,11 +42,6 @@ public class UserController {
 		return us.getUserById(ID);
 	}
 	
-	@RequestMapping(value= "/users/{USERNAME}", method= RequestMethod.GET)
-	public User getUserByUsername(@PathVariable String USERNAME) {
-		return us.getUserByUsername(USERNAME);
-	}
-	
 	@RequestMapping(value= "/users", method= RequestMethod.GET)
 	public Set<User> getAllUsers(){
 		return us.getAllUsers();
