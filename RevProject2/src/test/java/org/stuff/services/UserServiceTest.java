@@ -32,113 +32,85 @@ public class UserServiceTest {
 	
 	
 	// saving an instance of user for testing
-	static User testUser;
-	
-	
-
+	static User testUser1;
+	static User testUser2;
 	
 	@Test
 	@Order(1)
 	@Commit
 	void setup() {
-		testUser = new User();
-		testUser.setUsername("TestUser");
-		testUser.setPassword("Pa$$word");
-		testUser.setEmail("TestUser@test.com");
-		testUser.setPhoneNumber("1234567890");
-		testUser = us.createUser(testUser);
-	}
-	
-	// Create
-	
+		testUser1 = new User();
+		testUser1.setUsername("USTestUser1");
+		testUser1.setPassword("Pa$$word");
+		testUser1.setEmail("TestUser@test.com");
+		testUser1.setPhoneNumber("1234567890");
+		testUser1 = us.createUser(testUser1);
+		assertTrue(testUser1 != null);
+		
+		testUser2 = new User();
+		testUser2.setUsername("USTestUser2");
+		testUser2.setPassword("Pa$$word1");
+		testUser2.setEmail("TestUser@test.com");
+		testUser2.setPhoneNumber("1234567890");
+		testUser2 = us.createUser(testUser2);
+	}	
+
+	// Read
 	@Test
 	@Order(2)
-	void createUser() {
-		
-		assertTrue(testUser != null);
-	}
-	
-	
-
-//	// Read
-	
-	@Test
-	@Order(3)
 	void getUserById() {
-		User result = us.getUserById(testUser.getId());
+		User result = us.getUserById(testUser1.getId());
 		assertTrue(result != null);
-		assertTrue(result.getId() == testUser.getId());
+		assertTrue(result.getId() == testUser1.getId());
 	}
-	
-	
 	@Test
-	@Order(3)
+	@Order(2)
 	void getUserByUsername() {
-		User result = us.getUserByUsername(testUser.getUsername());
+		User result = us.getUserByUsername(testUser1.getUsername());
 		assertTrue(result != null);
-		assertTrue(result.getUsername().equals(testUser.getUsername()));
+		assertTrue(result.getUsername().equals(testUser1.getUsername()));
 	}
-	
 	@Test
-	@Order(3)
-	void getAllUsers() {
-		User tempUser = new User();
-		tempUser.setUsername("secondUser");
-		tempUser.setPassword("Pa$$word1");
-		tempUser.setEmail("TestUser@test.com");
-		tempUser.setPhoneNumber("1234567890");
-		tempUser = us.createUser(tempUser);
-		
+	@Order(2)
+	void getAllUsers() {		
 		Set<User> result = us.getAllUsers();
 
 		assertTrue(result != null);
-		assertTrue(result.remove(testUser));
-		assertTrue(result.remove(tempUser));
-		
+		assertTrue(result.contains(testUser1), "User1");
+		assertTrue(result.contains(testUser2), "User2");
 	}
-	
-	
 	@Test
-	@Order(3)
+	@Order(2)
 	void loginSuccess() {
-		assertTrue(us.login("TestUser", "Pa$$word") != null);
+		assertTrue(us.login("USTestUser1", "Pa$$word") != null);
 	}
-	
 	@Test
-	@Order(3)
+	@Order(2)
 	void loginFailUsername() {
 		assertTrue(!(us.login("wrong", "Pa$$word") != null));
 	}
-	
 	@Test
-	@Order(3)
+	@Order(2)
 	void loginFailPassword() {
-		assertTrue(!(us.login("TestUser", "wrong") != null));
+		assertTrue(!(us.login("USTestUser1", "wrong") != null));
 	}
-
-	
-	
 	// Update
-	
 	@Test
 	@Order(3)
 	void updateUser() {
-		String oldNumber = new String(testUser.getPhoneNumber());
-		testUser.setPhoneNumber("9999999999");
-		User tempUser = us.updateUser(testUser);
+		String oldNumber = new String(testUser1.getPhoneNumber());
+		testUser1.setPhoneNumber("9999999999");
+		User tempUser = us.updateUser(testUser1);
 		assertTrue(tempUser != null);
 		assertTrue(!tempUser.getPhoneNumber().equals(oldNumber));
 	}
-
 	
 	// Delete
-	
 	@Test
 	@Order(4)
+	@Commit
 	void deleteUser() {
-		
-		assertTrue(us.deleteUser(testUser));
+		assertTrue(us.deleteUser(testUser1));
+		assertTrue(us.deleteUser(testUser2));
 	}
-	
-	
 }
