@@ -25,8 +25,11 @@ public class UserController {
 	// Create
 	@RequestMapping(value="/users", method= RequestMethod.POST)
 	public User createUser(@RequestBody User user) {
-		
-		return us.createUser(user);
+		try {
+			return us.createUser(user);
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	// Read
