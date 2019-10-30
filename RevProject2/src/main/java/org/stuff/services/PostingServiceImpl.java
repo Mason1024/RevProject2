@@ -1,6 +1,6 @@
 package org.stuff.services;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.stuff.entities.Posting;
 import org.stuff.entities.User;
+import org.stuff.entities.WebPosting;
 import org.stuff.repos.PostingRepo;
 
 
@@ -22,63 +23,73 @@ public class PostingServiceImpl implements PostingService {
 	PostingRepo pr;
 
 	@Override
-	public Posting createPosting(Posting posting) {
+	public WebPosting createPosting(Posting posting) {
 		
-		return pr.save(posting);
+		return new WebPosting(pr.save(posting));
 	}
 
 	@Override
-	public Posting getPostingById(int p_id) {
+	public WebPosting getPostingById(int p_id) {
 		
-		return pr.findById(p_id).get();
+		return new WebPosting(pr.findById(p_id).get());
 	}
 
 	@Override
-	public Set<Posting> getAllPostingsByUser(User user) {
-		
-		return pr.findAllByUser(user);
+	public Set<WebPosting> getAllPostingsByUser(User user) {
+		Set<WebPosting> out = new HashSet<WebPosting>();
+		for(Posting post:pr.findAllByUser(user)) {
+			out.add(new WebPosting(post));
+		}
+		return out;
 	}
 
 	@Override
-	public Set<Posting> getAllPostingsByCategory(String category){
-		return pr.findAllByCategory(category);
+	public Set<WebPosting> getAllPostingsByCategory(String category){
+		Set<WebPosting> out = new HashSet<WebPosting>();
+		for(Posting post:pr.findAllByCategory(category)) {
+			out.add(new WebPosting(post));
+		}
+		return out;
 	}
 
 	@Override
-	public List<Posting> getAllPostingByEndingSoonest() {
-		List<Posting> items = pr.findAllByOrderByEndDateAsc();
-		for(int i=0;i<items.size();i++) {
-			if(items.get(0).getEndDate()==0) {
-				items.remove(items.get(0));
-			}else {
-				break;
+	public List<WebPosting> getAllPostingByEndingSoonest() {
+		List<WebPosting> out = new LinkedList<WebPosting>();
+		for(Posting post:pr.findAllByOrderByEndDateAsc()){
+			if(post.getEndDate()!=0) {
+				out.add(new WebPosting(post));
 			}
 		}
-		return items;
+		return out;
 	}
 
 	@Override
-	public List<Posting> getNewestByRange(int lowerIndex, int upperIndex) {
-		
-		return pr.findAllByOrderByInitDateDesc().subList(lowerIndex, upperIndex);
+	public List<WebPosting> getNewestByRange(int lowerIndex, int upperIndex) {
+		List<WebPosting> out = new LinkedList<WebPosting>();
+		for(Posting post:pr.findAllByOrderByInitDateDesc().subList(lowerIndex, upperIndex)) {
+			out.add(new WebPosting(post));
+		}
+		return out;
 	}
 
 	@Override
-	public List<Posting> getAllPostings() {
-		return new LinkedList<Posting>((Collection<? extends Posting>) pr.findAll());
+	public List<WebPosting> getAllPostings() {		
+		List<WebPosting> out = new LinkedList<WebPosting>();
+		for(Posting post:pr.findAll()) {
+			out.add(new WebPosting(post));
+		}
+		return out;
 	}
 
 	@Override
-	public Posting updatePosting(Posting posting) {
-		
-		return pr.save(posting);
+	public WebPosting updatePosting(Posting posting) {
+		return new WebPosting(pr.save(posting));
 	}
 
 	@Override
-	public boolean deletePosting(Posting posting) {
-		
+	public boolean deletePosting(int id) {
 		try {
-			pr.delete(posting);
+			pr.delete(pr.findById(id).get());
 			return true;
 		} catch (Exception e) {
 			return false;
