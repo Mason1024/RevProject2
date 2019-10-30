@@ -3,31 +3,32 @@ package org.stuff.services;
 import java.util.Set;
 
 import org.stuff.entities.User;
+import org.stuff.entities.WebUser;
 
 public interface UserService {
 
 	// Create
 	
-	User createUser(User user);
+	WebUser createUser(User user);
 	
 	
 	// Read
 	
-	User login(String username, String password);
+	WebUser login(String username, String password);
 	
-	User getUserById(int id);
-	User getUserByUsername(String username);
-	Set<User> getAllUsers();
+	WebUser getUserById(int id);
+	WebUser getUserByUsername(String username);
+	Set<WebUser> getAllUsers();
 	
 	
 	// Update
 	
-	User updateUser(User user);
+	WebUser updateUser(User user);
 	
 	
 	// Delete
 	
-	boolean deleteUser(User user);
+	boolean deleteUser(int id);
 	
 	
 	

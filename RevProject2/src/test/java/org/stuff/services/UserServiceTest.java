@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import org.stuff.entities.User;
+import org.stuff.entities.WebUser;
 
 
 @SpringBootTest
@@ -31,48 +32,38 @@ public class UserServiceTest {
 	
 	
 	// saving an instance of user for testing
-	static User testUser1;
-	static User testUser2;
+	static WebUser testUser1;
+	static WebUser testUser2;
 	
 	@Test
 	@Order(1)
 	@Commit
 	void setup() {
-		testUser1 = new User();
-		testUser1.setUsername("USTestUser1");
-		testUser1.setPassword("Pa$$word");
-		testUser1.setEmail("TestUser@test.com");
-		testUser1.setPhoneNumber("1234567890");
-		testUser1 = us.createUser(testUser1);
+		testUser1 = us.createUser(new User(0, "USTestUser1","Pa$$word","TestUser@test.com","1234567890"));
 		assertTrue(testUser1 != null);
 		
-		testUser2 = new User();
-		testUser2.setUsername("USTestUser2");
-		testUser2.setPassword("Pa$$word1");
-		testUser2.setEmail("TestUser@test.com");
-		testUser2.setPhoneNumber("1234567890");
-		testUser2 = us.createUser(testUser2);
+		testUser2 = us.createUser(new User(0, "USTestUser2","Pa$$word1","TestUser@test.com","1234567890"));
 	}	
 
 	// Read
 	@Test
 	@Order(2)
 	void getUserById() {
-		User result = us.getUserById(testUser1.getId());
+		WebUser result = us.getUserById(testUser1.getId());
 		assertTrue(result != null);
 		assertTrue(result.getId() == testUser1.getId());
 	}
 	@Test
 	@Order(2)
 	void getUserByUsername() {
-		User result = us.getUserByUsername(testUser1.getUsername());
+		WebUser result = us.getUserByUsername(testUser1.getUsername());
 		assertTrue(result != null);
 		assertTrue(result.getUsername().equals(testUser1.getUsername()));
 	}
 	@Test
 	@Order(2)
 	void getAllUsers() {		
-		Set<User> result = us.getAllUsers();
+		Set<WebUser> result = us.getAllUsers();
 
 		assertTrue(result != null);
 		assertTrue(result.contains(testUser1), "User1");
@@ -99,7 +90,7 @@ public class UserServiceTest {
 	void updateUser() {
 		String oldNumber = new String(testUser1.getPhoneNumber());
 		testUser1.setPhoneNumber("9999999999");
-		User tempUser = us.updateUser(testUser1);
+		WebUser tempUser = us.updateUser(new User(testUser1));
 		assertTrue(tempUser != null);
 		assertTrue(!tempUser.getPhoneNumber().equals(oldNumber));
 	}
@@ -109,7 +100,7 @@ public class UserServiceTest {
 	@Order(4)
 	@Commit
 	void deleteUser() {
-		assertTrue(us.deleteUser(testUser1));
-		assertTrue(us.deleteUser(testUser2));
+		assertTrue(us.deleteUser(testUser1.getId()));
+		assertTrue(us.deleteUser(testUser2.getId()));
 	}
 }

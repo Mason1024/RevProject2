@@ -31,6 +31,23 @@ public class User {
 	public User() {
 		super();
 	}
+	
+	public User(int id, String username, String password, String email, String phoneNumber) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public User(WebUser user) {
+		super();
+		this.id = user.getId();
+		this.username = user.getUsername();
+		this.email = user.getEmail();
+		this.phoneNumber = user.getPhoneNumber();
+	}
 
 	public int getId() {
 		return id;

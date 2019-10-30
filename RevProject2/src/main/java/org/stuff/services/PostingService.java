@@ -5,37 +5,38 @@ import java.util.Set;
 
 import org.stuff.entities.Posting;
 import org.stuff.entities.User;
+import org.stuff.entities.WebPosting;
 
 public interface PostingService {
 	
 	
 	// Create
 	
-	Posting createPosting(Posting posting);
+	WebPosting createPosting(Posting posting);
 	
 	
 	
 	// Read
 	
-	Posting getPostingById(int p_id);
-	Set<Posting> getAllPostingsByUser(User user);
-	Set<Posting> getAllPostingsByCategory(String category);
-	List<Posting> getAllPostingByEndingSoonest();
+	WebPosting getPostingById(int p_id);
+	Set<WebPosting> getAllPostingsByUser(User user);
+	Set<WebPosting> getAllPostingsByCategory(String category);
+	List<WebPosting> getAllPostingByEndingSoonest();
 	/**
 	 * @param lowerIndex index 0, inclusive
 	 * @param upperIndex exclusive
 	 * @return
 	 */
-	List<Posting> getNewestByRange(int lowerIndex, int upperIndex);
-	List<Posting> getAllPostings();
+	List<WebPosting> getNewestByRange(int lowerIndex, int upperIndex);
+	List<WebPosting> getAllPostings();
 	
 	// Update
 	
-	Posting updatePosting(Posting posting);	
+	WebPosting updatePosting(Posting posting);	
 	
 	
 	// Delete
 	
-	boolean deletePosting(Posting posting);
+	boolean deletePosting(int id);
 
 }
