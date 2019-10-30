@@ -1,6 +1,8 @@
 package org.stuff.controllers;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,11 @@ public class PostingController {
 	@RequestMapping(value= "/postings/allbyuser/{ID}", method= RequestMethod.GET)
 	public Posting getPostingByUser(@PathVariable int ID) {
 		return ps.getPostingById(ID);
+	}
+	
+	@RequestMapping(value= "/postings/allbycategory/{category}", method= RequestMethod.GET)
+	public Set<Posting> getAllPostingByCategory(@PathVariable String category){
+		return ps.getAllPostingsByCategory(category);
 	}
 	
 	@RequestMapping(value= "/postings", method= RequestMethod.GET)
