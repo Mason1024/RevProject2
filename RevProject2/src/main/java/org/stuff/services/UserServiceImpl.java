@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public WebUser updateUser(User user) {
-		
+		user.setPassword(ur.findById(user.getId()).get().getPassword());
 		return new WebUser(ur.save(user));
 	}
 
