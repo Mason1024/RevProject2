@@ -1,6 +1,5 @@
 package org.stuff.services;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.stuff.entities.User;
+import org.stuff.entities.WebUser;
 import org.stuff.repos.UserRepo;
 
 
@@ -19,52 +19,50 @@ public class UserServiceImpl implements UserService {
 	UserRepo ur;
 
 	@Override
-	public User createUser(User user) {
+	public WebUser createUser(User user) {
 		
-		return ur.save(user);
+		return new WebUser(ur.save(user));
 	}
 
-	public User login(String username, String password) {
-		User user = this.getUserByUsername(username);
+	public WebUser login(String username, String password) {
+		User user = ur.findByUsername(username);
 		if(user!=null && user.getPassword().equals(password)) {
-			return user;
+			return new WebUser(user);
 		}
 		return null;
 	}
 	
 	@Override
-	public User getUserById(int id) {
+	public WebUser getUserById(int id) {
 		
-		return ur.findById(id).get();
+		return new WebUser(ur.findById(id).get());
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
+	public WebUser getUserByUsername(String username) {
 		
-		return ur.findByUsername(username);
+		return new WebUser(ur.findByUsername(username));
 	}
 
 	@Override
-	public Set<User> getAllUsers() {
-		
-		return new HashSet<User>((Collection<? extends User>) ur.findAll());
+	public Set<WebUser> getAllUsers() {
+		Set<WebUser> out = new HashSet<WebUser>();
+		for(User user:ur.findAll()) {
+			out.add(new WebUser(user));
+		}
+		return out;
 	}
 
 	@Override
-	public User updateUser(User user) {
+	public WebUser updateUser(User user) {
 		
-		return ur.save(user);
+		return new WebUser(ur.save(user));
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
-		
-
-			ur.delete(user);
-			return !ur.existsById(user.getId());
-
-		
-		
+	public boolean deleteUser(int id) {
+		ur.delete(ur.findById(id).get());
+		return !ur.existsById(id);
 	}
 
 }
