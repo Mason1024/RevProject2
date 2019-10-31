@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.stuff.entities.Posting;
+import org.stuff.entities.User;
 import org.stuff.entities.WebPosting;
 import org.stuff.services.PostingService;
+import org.stuff.services.UserService;
 
 @Component
 @RestController
@@ -22,6 +24,9 @@ public class PostingController {
 	
 	@Autowired
 	PostingService ps;
+	
+	@Autowired
+	UserService us;
 	
 	// Create
 	@CrossOrigin(origins = "*")
@@ -39,8 +44,8 @@ public class PostingController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/allbyuser/{ID}", method= RequestMethod.GET)
-	public WebPosting getPostingByUser(@PathVariable int ID) {
-		return ps.getPostingById(ID);
+	public Set<WebPosting> getPostingByUser(@PathVariable int ID) {
+		return ps.getAllPostingsByUser(new User(us.getUserById(ID)));
 	}
 	
 	@CrossOrigin(origins = "*")
