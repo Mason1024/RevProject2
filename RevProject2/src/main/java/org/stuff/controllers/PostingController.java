@@ -23,42 +23,45 @@ public class PostingController {
 	@Autowired
 	PostingService ps;
 	
-	
 	// Create
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings", method= RequestMethod.POST)
 	public WebPosting createPosting(@RequestBody Posting posting) {
 		return ps.createPosting(posting);
 	}
 	
-	
 	// Read
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/{ID}", method= RequestMethod.GET)
 	public WebPosting getPostingById(@PathVariable int ID) {
 		return ps.getPostingById(ID);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/allbyuser/{ID}", method= RequestMethod.GET)
 	public WebPosting getPostingByUser(@PathVariable int ID) {
 		return ps.getPostingById(ID);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/allbycategory/{category}", method= RequestMethod.GET)
 	public Set<WebPosting> getAllPostingByCategory(@PathVariable String category){
 		return ps.getAllPostingsByCategory(category);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings", method= RequestMethod.GET)
 	public List<WebPosting> getAllPostings(){
 		return ps.getAllPostings();
 	}
 	
-	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/end", method= RequestMethod.GET)
 	public List<WebPosting> getPostingsEndingSoonest(){
 		return ps.getAllPostingByEndingSoonest();
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/range/{lower}/{upper}", method= RequestMethod.GET)
 	public List<WebPosting> getPostingsByRange(@PathVariable int lower, @PathVariable int upper){
 		return this.getAllPostings().subList(lower, upper);
@@ -66,7 +69,7 @@ public class PostingController {
 	
 	
 	// Update
-	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings", method= RequestMethod.PUT)
 	public WebPosting updatePosting(@RequestBody Posting posting){
 		return ps.updatePosting(posting);
@@ -74,7 +77,7 @@ public class PostingController {
 	
 	
 	// Delete
-	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings/{id}", method= RequestMethod.DELETE)
 	public boolean deletePosting(@PathVariable int id) {
 		return ps.deletePosting(id);
