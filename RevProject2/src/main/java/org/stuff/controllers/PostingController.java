@@ -32,6 +32,7 @@ public class PostingController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value= "/postings", method= RequestMethod.POST)
 	public WebPosting createPosting(@RequestBody Posting posting) {
+		posting.setInitDate(System.currentTimeMillis());
 		return ps.createPosting(posting);
 	}
 	
