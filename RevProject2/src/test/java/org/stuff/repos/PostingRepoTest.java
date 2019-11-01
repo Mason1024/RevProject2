@@ -2,6 +2,7 @@ package org.stuff.repos;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -120,14 +121,12 @@ public class PostingRepoTest {
 	@Test
 	@Order(2)
 	void findAllByOrderByEndDateAsc() {
-		List<Posting> items = pr.findAllByOrderByEndDateAsc();
+		List<Posting> items = new LinkedList<Posting>();
 		
 		//remove the items without end date (0 time)
-		for(int i=0;i<items.size();i++) {
-			if(items.get(0).getEndDate()==0) {
-				items.remove(items.get(0));
-			}else {
-				break;
+		for(Posting item:pr.findAllByOrderByEndDateAsc()) {
+			if(item.getEndDate()!=0) {
+				items.add(item);
 			}
 		}
 		
